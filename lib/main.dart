@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:test_users_firebase/loginorsignupscreen.dart';
+import 'package:test_users_firebase/splashscreen.dart';
 
 import 'firebase_options.dart';
 import 'homepage.dart';
@@ -28,12 +29,7 @@ class _MyAppState extends State<MyApp> {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(
-            home: Scaffold(
-                body: Center(
-              child: CircularProgressIndicator(),
-            )),
-          );
+          return splashscreen();
         }
         if (snapshot.hasData) {
           return homepage();

@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:test_users_firebase/authserviceclass.dart';
+
+import 'imagewidget.dart';
 
 class loginorsignup extends StatefulWidget {
   const loginorsignup({super.key});
@@ -12,14 +16,22 @@ class _loginorsignupState extends State<loginorsignup> {
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final usernamecontroller = TextEditingController();
-
+  File? enteredimage;
   var isloggined = authserviceclass().isloggined;
+  var isauth = false;
 
-  signinhere(String email, String password, String username) async {
-    authserviceclass().signin(email, password, username);
+  signinhere(
+      String email, String password, String username, File enteredimage) async {
+    setState(() {
+      isauth = true;
+    });
+    authserviceclass().signin(email, password, username, enteredimage);
   }
 
   loginhere(String email, String password) async {
+    setState(() {
+      isauth = true;
+    });
     authserviceclass().login(email, password);
   }
 
@@ -40,6 +52,15 @@ class _loginorsignupState extends State<loginorsignup> {
                 isloggined ? "welcome back !" : "sign up for an account",
                 style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              if (!isloggined)
+                imagewidget(
+                  getpickedimage: (pickedimage) {
+                    enteredimage = pickedimage;
+                  },
+                ),
               if (!isloggined)
                 Container(
                   decoration: BoxDecoration(
@@ -90,7 +111,7 @@ class _loginorsignupState extends State<loginorsignup> {
                 onTap: () {
                   if (!isloggined) {
                     signinhere(emailcontroller.text, passwordcontroller.text,
-                        usernamecontroller.text);
+                        usernamecontroller.text, enteredimage!);
                   }
                   if (isloggined) {
                     loginhere(emailcontroller.text, passwordcontroller.text);
@@ -112,13 +133,15 @@ class _loginorsignupState extends State<loginorsignup> {
                       borderRadius: BorderRadius.circular(12),
                       color: const Color.fromARGB(255, 219, 219, 219),
                     ),
-                    child: Text(
-                      isloggined ? "login" : "sign up",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )),
+                    child: isauth
+                        ? CircularProgressIndicator()
+                        : Text(
+                            isloggined ? "login" : "sign up",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )),
               ),
               TextButton(
                   onPressed: () {

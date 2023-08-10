@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class authserviceclass {
@@ -7,12 +10,26 @@ class authserviceclass {
 
   FirebaseAuth authinstance = FirebaseAuth.instance;
 
-  void signin(String email, String password,String username) async {
+  void signin(String email, String password, String username,
+      File? enteredimageauth) async {
     try {
-      await authinstance.createUserWithEmailAndPassword(
+      print(enteredimageauth);
+      final usercredentials = await authinstance.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      adduserdetails(username, email, password);
+      print(' enteredimageauth = ${enteredimageauth.toString()}');
+      //storing images/////////////////////////////////////////////////////////
+      final usercredentialsimage = FirebaseStorage.instance
+          .ref()
+          .child("user images")
+          .child("${usercredentials.user!.uid}.jpg");
+
+      await usercredentialsimage.putFile(enteredimageauth!);
+      final imageurl = await usercredentialsimage.getDownloadURL();
+      print(' image string is  ${imageurl}');
+
+      ////// creating and storing folder containing user data
+      adduserdetails(username, email, password, imageurl);
     } catch (e) {
       Text("couldnt sign in");
     }
@@ -32,9 +49,16 @@ class authserviceclass {
     /*  return loginorsignup(); */
   }
 
-  Future adduserdetails(String username, String email, String password) async {
-    await FirebaseFirestore.instance
-        .collection("users")
-        .add({"username": username, "email": email, "password": password});
+  Future adduserdetails(
+      String username, String email, String password, String image) async {
+    await FirebaseFirestore.instance.collection("users").add(
+      {
+        "username": username,
+        "email": email,
+        "password": password,
+        "uid": authinstance.currentUser!.uid,
+        "image": image
+      },
+    );
   }
 }
