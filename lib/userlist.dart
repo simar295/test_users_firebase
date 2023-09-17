@@ -41,7 +41,7 @@ class _userlistState extends State<userlist> {
                           borderRadius: BorderRadius.circular(10))),
                   child: Container(
                     padding: EdgeInsets.fromLTRB(0, 16, 16, 16),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       border: Border(
                         left: BorderSide(
                             color: Color.fromARGB(255, 255, 3, 78), width: 3),

@@ -83,14 +83,14 @@ class _homepageState extends State<homepage> {
               )
             ],
           ),
-          actions: [
+          actions: const [
             SizedBox(
               width: 10,
             ),
             Icon(
               Icons.cable_outlined,
               size: 20,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
             SizedBox(
               width: 10,
@@ -98,7 +98,7 @@ class _homepageState extends State<homepage> {
             Icon(
               Icons.data_usage_rounded,
               size: 20,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
             SizedBox(
               width: 10,
@@ -111,7 +111,7 @@ class _homepageState extends State<homepage> {
                 icon: Icon(Icons.login_outlined)) */
           ],
         ),
-        body: Column(
+        body: const Column(
           children: [
             userlist(),
           ],

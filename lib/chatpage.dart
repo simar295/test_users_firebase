@@ -129,7 +129,7 @@ class _chatpageState extends State<chatpage> {
         : Alignment.centerRight;
 
     return Container(
-      padding: EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10),
       alignment: alignment,
       child: Column(
           crossAxisAlignment:
