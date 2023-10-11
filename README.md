@@ -1,6 +1,8 @@
 # test_users_firebase
 
 A new Flutter project.
+DOWNLOAD OFFICIAL APK FROM HERE
+https://drive.google.com/file/d/10kyUeMZzmjHBNfONyCivfBHYkGEzs6B7/view?usp=sharing
 
 ## Getting Started
 
