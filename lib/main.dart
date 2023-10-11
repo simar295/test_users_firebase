@@ -28,9 +28,9 @@ class _MyAppState extends State<MyApp> {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        /*  if (snapshot.connectionState == ConnectionState.waiting) {
           return splashscreen();
-        }
+        } */
         if (snapshot.hasData) {
           return homepage();
         } else

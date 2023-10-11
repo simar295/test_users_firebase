@@ -11,7 +11,7 @@ class authserviceclass {
   FirebaseAuth authinstance = FirebaseAuth.instance;
 
   void signin(String email, String password, String username,
-      File? enteredimageauth) async {
+      File? enteredimageauth, String designation) async {
     try {
       print(enteredimageauth);
       final usercredentials = await authinstance.createUserWithEmailAndPassword(
@@ -29,7 +29,7 @@ class authserviceclass {
       print(' image string is  ${imageurl}');
 
       ////// creating and storing folder containing user data
-      adduserdetails(username, email, password, imageurl);
+      adduserdetails(username, email, password, imageurl, designation);
     } catch (e) {
       Text("couldnt sign in");
     }
@@ -49,15 +49,16 @@ class authserviceclass {
     /*  return loginorsignup(); */
   }
 
-  Future adduserdetails(
-      String username, String email, String password, String image) async {
+  Future adduserdetails(String username, String email, String password,
+      String image, String designation) async {
     await FirebaseFirestore.instance.collection("users").add(
       {
         "username": username,
         "email": email,
         "password": password,
         "uid": authinstance.currentUser!.uid,
-        "image": image
+        "image": image,
+        "designation": designation,
       },
     );
   }

@@ -35,7 +35,8 @@ class chatservice {
       timestamps: Timestamp.now(),
     );
 
-    //contruct a chat room id from currentuserid and reiveruserid (sort to ensure uniqueness that ex- [a,b] room will remain same in case of  [b,a])
+    //contruct a chat room id from currentuserid and reiveruserid 
+    //(sort to ensure uniqueness that ex- [a,b] room will remain same in case of  [b,a])
     List<String> ids = [currentuserid, recieveridhere];
     ids.sort();
     //combining two ids to get one single chatroom id
@@ -53,7 +54,8 @@ class chatservice {
   // get messages
 
   Stream<QuerySnapshot> getmessages(String userid, String otheruserid) {
-    //contruct a chat room id from currentuserid and reiveruserid (sort to ensure uniqueness that ex- [a,b] room will remain same in case of  [b,a])
+    //contruct a chat room id from currentuserid and reiveruserid
+    // (sort to ensure uniqueness that ex- [a,b] room will remain same in case of  [b,a])
     List<String> ids = [userid, otheruserid];
     ids.sort();
     //combining two ids to get one single chatroom id

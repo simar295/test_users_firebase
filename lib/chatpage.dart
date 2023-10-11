@@ -70,7 +70,13 @@ class _chatpageState extends State<chatpage> {
             leading: CircleAvatar(
               backgroundImage: NetworkImage(widget.getimage),
             ),
-            actions: [],
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.arrow_downward_rounded))
+            ],
           ),
           body: Column(
             children: [
