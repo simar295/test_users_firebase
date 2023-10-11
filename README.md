@@ -1,7 +1,7 @@
 # CONVOS_firebase
 
 
-DOWNLOAD OFFICIAL APK FROM HERE
+DOWNLOAD OFFICIAL APK RELEASE FROM HERE
 https://drive.google.com/file/d/10kyUeMZzmjHBNfONyCivfBHYkGEzs6B7/view?usp=sharing
 
 ## Getting Started
